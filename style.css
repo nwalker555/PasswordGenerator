@@ -1,0 +1,37 @@
+#main-div {
+    text-align: center;
+    padding-top: 1%;
+    border: 10px;
+    border-color: black;
+}
+
+#mini-div {
+    text-align: center;
+    padding-top: 10px;
+}
+
+#password-div {
+    padding: 100px;
+    text-align: center;
+    border-style: dashed;
+    width: 50%;
+    margin-left: 25%;
+}
+
+#generator {
+    padding-top: 10%;
+    text-align: center;
+}
+
+#info {
+    visibility: hidden;
+    text-align: center;
+}
+
+#value {
+    visibility: hidden;
+}
+
+#info {
+    visibility:
+}

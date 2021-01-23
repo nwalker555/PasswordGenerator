@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator:Safety First</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+</head>
+    
+<body>
+    <header id="main-div">
+        <h1>Password Generator</h1>
+        </header>
+        <div id="mini-div">
+            <h2>Generate A Password</h2>
+            <div id="password-div">
+                <h3 id="pass-quest">Your Secure Password</h3>
+            </div>
+            <button id="Generator" type="button" class="btn btn-danger">Generate Password</button>
+        </div>
+    <script>
+        
+        var symbolsArray = ["!", "@", "#", "%", "^", "&", "*", "(", ")"];
+        var alphabetArray =["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        var capitalsArray =["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+        var numbersArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+
+        var generateBTN = document.getElementById("Generator")
+
+        generateBTN.addEventListener("click", function(){
+            console.log("button")
+            var allowed = '';
+            var length = parseInt(prompt("How many characters would you like in your password?"))
+            if (isNaN(length) === true ) {
+                alert("Password length must be a number");
+                return
+            } 
+            if (length < 8 || length > 128) {
+                alert("Password length must be between 8-128!")
+                return
+            } 
+            confirmCheck(length)
+        });
+
+        function confirmCheck(length) {
+            var uppercase = confirm("Do you want to include uppercase characters?");
+            var lowercase = confirm("Do you want to include lowercase characters?")
+            var numbers= confirm("Do you want to include numbers?")
+            var symbols = confirm("Do you want to include symbols?")
+
+            if(!uppercase && !lowercase && !numbers && !symbols){
+                alert("You must pick one attribue for your password?");
+                return
+            }
+
+            var array = []
+            if(uppercase && lowercase && numbers && symbols === true) {
+                array = [].concat(symbolsArray, alphabetArray, capitalsArray, numbersArray);
+            } else if(uppercase && lowercase && numbers === true){
+                array = [].concat(capitalsArray, alphabetArray, numbersArray);
+            } else if(lowercase && numbers && symbols === true){
+                array = [].concat(alphabetArray, numbersArray, symbolsArray);
+            } else if(uppercase && numbers && symbols === true){
+                array = [].concat(numbersArray, symbolsArray, capitalsArray);
+            } else if(symbols && uppercase && lowercase){
+                array = [].concat(capitalsArray, alphabetArray, symbolsArray)
+            } else if(uppercase && lowercase === true){
+                array = [].concat(capitalsArray, alphabetArray);
+            } else if(uppercase && numbers === true){
+                array = [].concat(numbersArray, capitalsArray);
+            } else if(uppercase && symbols === true){
+                array = [].concat(symbolsArray, capitalsArray);
+            } else if(lowercase && numbers === true){
+                array = [].concat(numbersArray, alphabetArray);
+            } else if(lowercase && symbols === true){
+                array = [].concat(symbolsArray, alphabetArray)
+            } else if(numbers && symbols === true){
+                array = [].concat(numbersArray, symbolsArray)
+            } else if(lowercase === true){
+                array = [].concat(alphabetArray);
+            } else if(uppercase === true){
+                array = [].concat(capitalsArray);
+            } else if(numbers === true){
+                array = [].concat(numbersArray);
+            } else if(symbols === true){
+                array = [].concat(symbolsArray);
+            };
+            
+            console.log(array)
+            
+            password = [];
+            for (var i = 0; i < length ; i++){
+                var choices = array[Math.floor(Math.random() * array.length)];
+                password.push(choices);
+                console.log(password);
+                var passwordString = password.toString();
+                console.log(passwordString)
+                document.getElementById("pass-quest").textContent = ("Your new password is: " + passwordString);
+            }
+        }
+        
+        
+    
+    </script>
+</body>
+</html>
